@@ -4,7 +4,7 @@ if ('yes' -eq $yesno) { Connect-AzAccount -EnvironmentName AzureUSGovernment; }
 $SubscriptionName = 'Subscription Name'
 Select-AzSubscription -SubscriptionName $SubscriptionName
 $RGName = "default-activitylogalerts"
-$ruletemplates = Get-Item "C:\Users\jastaley\OneDrive - Federal Bureau of Investigation\Source\Repos\AzureGov-GL-SecAuto\AlertRules\SubName-PPD\ModifyNSGRuleAlert-SubName-PPD.json"
+$ruletemplates = Get-Item "C:\Repos\*.json"
 
 ForEach($template in $ruletemplates){
     $templatepath = $template.PSPath
