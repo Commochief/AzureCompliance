@@ -1,0 +1,52 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {},
+    "variables": {},
+    "resources": [
+        {
+        "type": "microsoft.insights/activityLogAlerts",
+        "name": "NSG Delete Alert",
+        "apiVersion": "2017-04-01",
+        "location": "Global",
+        "tags": {},
+        "scale": null,
+        "properties": {
+            "scopes": [
+                "/subscriptions/ffffffff-1111-2222-3333-444444444444"
+            ],
+            "condition": {
+                "allOf": [
+                    {
+                        "field": "category",
+                        "equals": "Administrative"
+                    },
+                    {
+                        "field": "operationName",
+                        "equals": "Microsoft.Network/networkSecurityGroups/delete"
+                    },
+                    {
+                        "field": "level",
+                        "equals": "informational"
+                    },
+                    {
+                        "field": "status",
+                        "equals": "Accepted"
+                    }
+                ]
+            },
+            "actions": {
+                "actionGroups": [
+                    {
+                        "actionGroupId": "/subscriptions/ffffffff-1111-2222-3333-444444444444/resourceGroups/default-activitylogalerts/providers/microsoft.insights/actionGroups/ActionGroupName"
+                    }
+                ]
+            },
+            "enabled": true,
+            "description": "An Azure NSG in the Subscription has been deleted."
+            },
+            "dependsOn": [
+            ]
+        }
+    ]
+}

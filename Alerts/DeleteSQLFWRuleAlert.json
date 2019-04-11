@@ -1,0 +1,50 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {},
+    "variables": {},
+    "resources": [
+        {
+        "type": "microsoft.insights/activityLogAlerts",
+        "name": "SQL Rule Delete Alert",
+        "apiVersion": "2017-04-01",
+        "location": "Global",
+        "tags": {},
+        "scale": null,
+        "properties": {
+            "scopes": [
+                "/subscriptions/ffffffff-1111-2222-3333-444444444444"
+            ],
+                "condition": {
+                    "allOf": [
+                        {
+                            "field": "category",
+                            "equals": "Administrative"
+                        },
+                        {
+                            "field": "operationName",
+                            "equals": "Microsoft.Sql/servers/firewallRules/delete"
+                        },
+                        {
+                            "field": "level",
+                            "equals": "informational"
+                        }
+                    ]
+                },
+            "actions": {
+                "actionGroups": [
+                    {
+                        "actionGroupId": "/subscriptions/ffffffff-1111-2222-3333-444444444444/resourceGroups/default-activitylogalerts/providers/microsoft.insights/actionGroups/ActionGroupName",
+                        "actionGroupId": "/subscriptions/ffffffff-1111-2222-3333-444444444444/resourceGroups/default-activitylogalerts/providers/microsoft.insights/actionGroups/ActionGroupName",
+                        "actionGroupId": "/subscriptions/ffffffff-1111-2222-3333-444444444444/resourceGroups/default-activitylogalerts/providers/microsoft.insights/actionGroups/OrgName-UnitName-GroupName"                       
+                    }
+                ]
+            },
+            "enabled": true,
+            "description": "An Azure SQL Firewall Rule in the Subscription has been deleted."
+            },
+            "dependsOn": [
+            ]
+        }
+    ]
+}
